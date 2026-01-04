@@ -1,21 +1,67 @@
-.gradle
+# =====================
+# Gradle
+#======================
+.gradle/
+build/
+out/
 **/build/
 !**/src/**/build/
-
-# Ignore Gradle GUI config
 gradle-app.setting
-
-# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-!gradle-wrapper.jar
-
-# Avoid ignore Gradle wrappper properties
-!gradle-wrapper.properties
-
-# Cache of project
 .gradletasknamecache
 
-# Eclipse Gradle plugin generated files
-# Eclipse Core
+# Avoid ignoring Gradle wrapper jar file and other imprtant wrapper files (.jar files are usually ignored)
+!gradle/wrapper/gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# =====================
+# Minecraft / Modding
+# =====================
+run/
+runs/
+logs/
+crash-reports/
+
+# Generated assets & caches
+generated/
+.cache/
+mappings/
+remapped/
+
+# ======================
+# IDE's
+# ======================
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Eclipse
 .project
-# JDT-specific (Eclipse Java Development Tools)
 .classpath
+.settings/
+
+# ====================
+# OS files
+# ====================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# ===================
+# Java
+# ===================
+*.class
+*.log
+
+# ==================
+# Misc
+# ==================
+.env
