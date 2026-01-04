@@ -1,5 +1,5 @@
 # Everdale License
-Copyright @ 2026 Guilherme Figueiredo<br>
+Copyright © 2026 Guilherme Figueiredo<br>
 All Rights Reserved.
 
 ## Permissions
