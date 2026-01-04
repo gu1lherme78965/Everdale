@@ -1,6 +1,8 @@
 # :herb: Everdale
-*A peaceful farming and life-simulation mod for Minecraft*
-![Eerdale Banner](./docs/images/readme-banner.png
+![Eerdale Banner](./docs/images/readme-banner.jpg)
+
+
+***A peaceful farming and life-simulation mod for Minecraft***<br>
 
 ## :seedling: Overview
 **License Notice:**<br>
@@ -11,7 +13,7 @@ Rather than focusing on efficiency or automation-first gameplay, Everdale emphas
 Everdale is meant to feel complete on its own, a self-contained experience you can return to when you want peace, focus and a sense fo quiet progression.
 
 ## :sparkles: Core Features
-### :ear:of_rice: Crops & Gardening
+### :ear_of_rice: Crops & Gardening
 + Multi-stage, visually rich crop growth
 + Soil quality, water, biome and environment influence plants
 + Overhauled vanilla crops for a cohesive, immersive experience
@@ -79,6 +81,14 @@ Everdale is **source-available** under a custom license.
 + :heavy_check_mark: Private modification and sharing between friends is allowed
 + :heavy_check_mark: Modpack use is allowed (unmodified)
 + :x: Public redistribution of modified versions is not permitted
+
+#### Additional Permissions
+If you wish to:
++ Create a public fork
++ Redistribute a modified version
++ Use Everdale assets in another project
+
+You must obtain **explicit written permission** from the author.
 
 See [LICENSE.md](./LICENSE.md) for full details.
 
