@@ -2,7 +2,7 @@
 # Gradle
 # ====================
 .gradle/
-**/build/
+build/
 out/
 gradle-app.setting
 .gradletasknamecache
@@ -31,20 +31,26 @@ remapped/
 # IDEs
 # ======================
 # IntelliJ IDEA
-.idea/
+out
+*.ipr
+*.iml
+*.iws
+.idea
 # ignore user-specific workspace and local settings
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/dictionaries/
-*.iml
 
 # VS Code
 .vscode/
 
 # Eclipse
+bin
+*.launch
+.metadata
 .project
 .classpath
-.settings/
+.settings
 
 # ====================
 # OS files
@@ -84,3 +90,10 @@ secrets.json
 # Editor/IDE backup files
 *.swp
 *.swo
+
+# Files from Forge MDK
+forge*changelog.txt
+
+# Other
+eclipse
+run
