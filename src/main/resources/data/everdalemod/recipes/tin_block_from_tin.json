@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "everdalemod:tin"
+    }
+  },
+  "result": {
+    "item": "everdalemod:tin_block",
+    "count": 1
+  }
+}

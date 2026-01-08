@@ -2,10 +2,12 @@ package com.figueiredo.everdalemod.block;
 
 import com.figueiredo.everdalemod.EverdaleMod;
 import com.figueiredo.everdalemod.item.ModItems;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,10 +24,17 @@ public class ModBlocks {
             registerBlock("tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
     public static final RegistryObject<Block> RAW_TIN_BLOCK =
             registerBlock("raw_tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK)));
+
     public static final RegistryObject<Block> TIN_ORE_BLOCK =
-            registerBlock("tin_ore_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+            registerBlock("tin_ore_block", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)
+                    .strength(1.6F)
+                    .requiresCorrectToolForDrops(),
+                    UniformInt.of(3, 6)));
     public static final RegistryObject<Block> DEEPSLATE_TIN_ORE_BLOCK =
-            registerBlock("deepslate_tin_ore_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+            registerBlock("deepslate_tin_ore_block", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_IRON_ORE)
+                    .strength(1.8F)
+                    .requiresCorrectToolForDrops(),
+                    UniformInt.of(3, 6)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> blockRegistry = BLOCKS.register(name, block);
