@@ -1,6 +1,7 @@
 package com.figueiredo.everdalemod.item;
 
 import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -20,6 +21,11 @@ public class ModCreativeModeTabs {
                 .displayItems((pParameters, pOutput) -> {
                     pOutput.accept(ModItems.TIN.get());
                     pOutput.accept(ModItems.RAW_TIN.get());
+
+                    pOutput.accept(ModBlocks.TIN_BLOCK.get());
+                    pOutput.accept(ModBlocks.RAW_TIN_BLOCK.get());
+                    pOutput.accept(ModBlocks.TIN_ORE_BLOCK.get());
+                    pOutput.accept(ModBlocks.DEEPSLATE_TIN_ORE_BLOCK.get());
                 })
                 .build());
 

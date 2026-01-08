@@ -1,5 +1,6 @@
 package com.figueiredo.everdalemod;
 
+import com.figueiredo.everdalemod.block.ModBlocks;
 import com.figueiredo.everdalemod.item.ModCreativeModeTabs;
 import com.figueiredo.everdalemod.item.ModItems;
 import com.mojang.logging.LogUtils;
@@ -32,6 +33,7 @@ public class EverdaleMod {
         ModCreativeModeTabs.register(modEventBus);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
