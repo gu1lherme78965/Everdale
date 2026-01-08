@@ -16,6 +16,9 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_TIN =
             ITEMS.register("raw_tin", () -> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> STRAWBERRY =
+            ITEMS.register("strawberry", () -> new Item(new Item.Properties().food(ModFoods.STRAWBERRY)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

@@ -19,6 +19,8 @@ public class ModCreativeModeTabs {
                 .icon(() -> new ItemStack(ModItems.TIN.get()))
                 .title(Component.translatable("everdale_tab.title"))
                 .displayItems((pParameters, pOutput) -> {
+                    pOutput.accept(ModItems.STRAWBERRY.get());
+
                     pOutput.accept(ModItems.TIN.get());
                     pOutput.accept(ModItems.RAW_TIN.get());
 
