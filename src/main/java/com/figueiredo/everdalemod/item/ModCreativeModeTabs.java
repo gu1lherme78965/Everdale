@@ -24,6 +24,12 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.TIN.get());
                     pOutput.accept(ModItems.RAW_TIN.get());
 
+                    pOutput.accept(ModItems.TIN_AXE.get());
+                    pOutput.accept(ModItems.TIN_HOE.get());
+                    pOutput.accept(ModItems.TIN_SHOVEL.get());
+                    pOutput.accept(ModItems.TIN_SWORD.get());
+                    pOutput.accept(ModItems.TIN_PICKAXE.get());
+
                     pOutput.accept(ModBlocks.TIN_BLOCK.get());
                     pOutput.accept(ModBlocks.RAW_TIN_BLOCK.get());
                     pOutput.accept(ModBlocks.TIN_ORE_BLOCK.get());

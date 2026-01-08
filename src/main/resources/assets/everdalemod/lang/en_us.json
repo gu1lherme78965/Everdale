@@ -6,6 +6,12 @@
   "item.everdalemod.tin": "Tin Ingot",
   "item.everdalemod.raw_tin": "Tin Ore",
 
+  "item.everdalemod.tin_sword": "Tin Sword",
+  "item.everdalemod.tin_pickaxe": "Tin Pickaxe",
+  "item.everdalemod.tin_axe": "Tin Axe",
+  "item.everdalemod.tin_shovel": "Tin Shovel",
+  "item.everdalemod.tin_hoe": "Tin Hoe",
+
   "block.everdalemod.tin_block": "Tin Block",
   "block.everdalemod.raw_tin_block": "Raw Tin Block",
   "block.everdalemod.tin_ore_block": "Tin Ore",
