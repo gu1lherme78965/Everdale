@@ -1,6 +1,10 @@
 package com.figueiredo.everdalemod;
 
+import com.figueiredo.everdalemod.item.ModCreativeModeTabs;
+import com.figueiredo.everdalemod.item.ModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -25,6 +29,10 @@ public class EverdaleMod {
     public EverdaleMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+
         // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
 
@@ -43,7 +51,6 @@ public class EverdaleMod {
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
