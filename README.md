@@ -1,7 +1,7 @@
 # :herb: Everdale
 ![Everdale Banner](./docs/images/readme-banner.jpg)
 
-[![Release](https://img.shields.io/github/v/release/gu1lherme78965/everdale)](https://github.com/gu1lherme78965/everdale/releases) [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-brightgreen)](https://www.minecraft.net/) [![Forge](https://img.shields.io/badge/Forge-X.Y-lightgrey)](https://files.minecraftforge.net/) [![License](https://img.shields.io/badge/License-Source--available-orange)](./LICENSE.md) [![Issues](https://img.shields.io/github/issues/gu1lherme78965/everdale)](https://github.com/gu1lherme78965/everdale/issues)
+[![Release](https://img.shields.io/github/v/release/gu1lherme78965/everdale)](https://github.com/gu1lherme78965/everdale/releases) [![Minecraft](https://img.shields.io/badge/Minecraft-1.20.1-brightgreen)](https://www.minecraft.net/) [![Forge](https://img.shields.io/badge/Forge-47.4.10-brightgreen)](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.20.1.html) [![License](https://img.shields.io/badge/License-Source--available-orange)](./LICENSE.md) [![Issues](https://img.shields.io/github/issues/gu1lherme78965/everdale)](https://github.com/gu1lherme78965/everdale/issues)
 
 ***A peaceful farming and life-simulation mod for Minecraft***
 
