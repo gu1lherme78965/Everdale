@@ -20,6 +20,10 @@ public class ModCreativeModeTabs {
                 .title(Component.translatable("everdale_tab.title"))
                 .displayItems((pParameters, pOutput) -> {
                     pOutput.accept(ModItems.STRAWBERRY.get());
+                    pOutput.accept(ModItems.CORN.get());
+
+                    pOutput.accept(ModItems.STRAWBERRY_SEEDS.get());
+                    pOutput.accept(ModItems.CORN_SEEDS.get());
 
                     pOutput.accept(ModItems.TIN.get());
                     pOutput.accept(ModItems.RAW_TIN.get());
@@ -29,6 +33,11 @@ public class ModCreativeModeTabs {
                     pOutput.accept(ModItems.TIN_SHOVEL.get());
                     pOutput.accept(ModItems.TIN_SWORD.get());
                     pOutput.accept(ModItems.TIN_PICKAXE.get());
+
+                    pOutput.accept(ModItems.TIN_HELMET.get());
+                    pOutput.accept(ModItems.TIN_CHESTPLATE.get());
+                    pOutput.accept(ModItems.TIN_LEGGINGS.get());
+                    pOutput.accept(ModItems.TIN_BOOTS.get());
 
                     pOutput.accept(ModBlocks.TIN_BLOCK.get());
                     pOutput.accept(ModBlocks.RAW_TIN_BLOCK.get());

@@ -2,6 +2,10 @@
   "everdale_tab.title": "Everdale",
 
   "item.everdalemod.strawberry": "Strawberry",
+  "item.everdalemod.corn": "Corn",
+
+  "item.everdalemod.strawberry_seeds": "Strawberry Seeds",
+  "item.everdalemod.corn_seeds": "Corn Seeds",
 
   "item.everdalemod.tin": "Tin Ingot",
   "item.everdalemod.raw_tin": "Tin Ore",
@@ -11,6 +15,11 @@
   "item.everdalemod.tin_axe": "Tin Axe",
   "item.everdalemod.tin_shovel": "Tin Shovel",
   "item.everdalemod.tin_hoe": "Tin Hoe",
+
+  "item.everdalemod.tin_helmet": "Tin Helmet",
+  "item.everdalemod.tin_chestplate": "Tin Chestplate",
+  "item.everdalemod.tin_leggings": "Tin Leggings",
+  "item.everdalemod.tin_boots": "Tin Boots",
 
   "block.everdalemod.tin_block": "Tin Block",
   "block.everdalemod.raw_tin_block": "Raw Tin Block",

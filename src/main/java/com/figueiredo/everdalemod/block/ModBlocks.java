@@ -1,6 +1,8 @@
 package com.figueiredo.everdalemod.block;
 
 import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.block.custom.CornCropBlock;
+import com.figueiredo.everdalemod.block.custom.StrawberryCropBlock;
 import com.figueiredo.everdalemod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -35,6 +37,11 @@ public class ModBlocks {
                     .strength(1.8F)
                     .requiresCorrectToolForDrops(),
                     UniformInt.of(3, 6)));
+
+    public static final RegistryObject<Block> STRAWBERRY_CROP = BLOCKS.register("strawberry_crop",
+                    () -> new StrawberryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+    public static final RegistryObject<Block> CORN_CROP = BLOCKS.register("corn_crop",
+                    () -> new CornCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> blockRegistry = BLOCKS.register(name, block);
