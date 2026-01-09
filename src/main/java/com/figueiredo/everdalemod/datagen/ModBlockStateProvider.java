@@ -10,6 +10,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -30,37 +32,37 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.TIN_BLOCK);
         blockWithItem(ModBlocks.RAW_TIN_BLOCK);
 
-        makeStrawberryCrop((CropBlock)ModBlocks.STRAWBERRY_CROP.get(), "strawberry_stage", "strawberry_stage");
-        makeCornCrop((CropBlock)ModBlocks.CORN_CROP.get(), "corn_stage_", "corn_stage_");
+        makeSimpleCrop((CropBlock)ModBlocks.STRAWBERRY_CROP.get(), StrawberryCropBlock.AGE, "strawberry_stage", "strawberry_stage");
+        makeTallCrop((CropBlock)ModBlocks.CORN_CROP.get(), CornCropBlock.AGE, CornCropBlock.HALF, "corn_stage_", "corn_stage_");
 
     }
 
-    private void makeStrawberryCrop(CropBlock cropBlock, String modelName, String textureName) {
-        Function<BlockState, ConfiguredModel[]> function = state -> strawberryStates(state, cropBlock, modelName, textureName);
+    private void makeSimpleCrop(CropBlock cropBlock, IntegerProperty ageProperty, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> simpleCropSates(state, cropBlock, ageProperty, modelName, textureName);
 
         getVariantBuilder(cropBlock).forAllStates(function);
     }
 
-    private ConfiguredModel[] strawberryStates(BlockState blockState, CropBlock cropBlock, String modelName, String TextureName) {
+    private ConfiguredModel[] simpleCropSates(BlockState blockState, CropBlock cropBlock, IntegerProperty ageProperty, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(((StrawberryCropBlock) cropBlock).getAgeProperty()),
-                new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  TextureName + blockState.getValue(((StrawberryCropBlock) cropBlock).getAgeProperty())))
-                .renderType("cutout"));
+        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(ageProperty).toString(),
+                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" + textureName + blockState.getValue(ageProperty).toString()))
+                    .renderType("cutout"));
 
         return models;
     }
 
-    private void makeCornCrop(CropBlock cropBlock, String modelName, String textureName) {
-        Function<BlockState, ConfiguredModel[]> function = state -> cornStates(state, cropBlock, modelName, textureName);
+    private void makeTallCrop(CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, String modelName, String textureName) {
+        Function<BlockState, ConfiguredModel[]> function = state -> tallCropStates(state, cropBlock, ageProperty, halfProperty, modelName, textureName);
 
         getVariantBuilder(cropBlock).forAllStates(function);
     }
 
-    private ConfiguredModel[] cornStates(BlockState blockState, CropBlock cropBlock, String modelName, String TextureName) {
-        String suffix = blockState.getValue(CornCropBlock.HALF) == DoubleBlockHalf.LOWER ? "_lower" : "_upper";
+    private ConfiguredModel[] tallCropStates(BlockState blockState, CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, String modelName, String textureName) {
+        String suffix = blockState.getValue(halfProperty) == DoubleBlockHalf.LOWER ? "_lower" : "_upper";
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(CornCropBlock.AGE) + suffix,
-                        new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  TextureName + blockState.getValue(CornCropBlock.AGE) + suffix))
+        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(ageProperty).toString() + suffix,
+                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  textureName + blockState.getValue(ageProperty).toString() + suffix))
                 .renderType("cutout"));
 
         return models;
