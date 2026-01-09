@@ -66,7 +66,7 @@ public class CornCropBlock extends CropBlock {
     @Override
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         if (pState.getValue(HALF) == DoubleBlockHalf.UPPER && pFacing == Direction.DOWN && pFacingState.getBlock() != this) {
-            Blocks.AIR.defaultBlockState();
+            return Blocks.AIR.defaultBlockState();
         }
 
         return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
@@ -97,8 +97,8 @@ public class CornCropBlock extends CropBlock {
                 pLevel.setBlock(pPos, newBlockState, 2);
 
                 // generate or updates block above if the threshold was hit
-                if (newAge >= AGE_TO_GROW_TOP && pLevel.getBlockState(pPos.above(1)).is(Blocks.AIR) ||
-                        pLevel.getBlockState(pPos.above(1)).getBlock() == this) {
+                if (newAge >= AGE_TO_GROW_TOP && (pLevel.getBlockState(pPos.above(1)).is(Blocks.AIR) ||
+                        pLevel.getBlockState(pPos.above(1)).getBlock() == this)) {
                     pLevel.setBlock(pPos.above(1), newBlockState.setValue(HALF, DoubleBlockHalf.UPPER).setValue(AGE, newAge), 3);
                 }
             } else if (pState.getValue(HALF) == DoubleBlockHalf.UPPER) {
@@ -180,7 +180,6 @@ public class CornCropBlock extends CropBlock {
 
         if (otherState.is(this)) {
             pLevel.destroyBlock(otherPos, false);
-            if (!isMature(pState)) pLevel.playSound(null, pPos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
 
         if (!isMature(pState)) pLevel.playSound(null, pPos, SoundEvents.CROP_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
