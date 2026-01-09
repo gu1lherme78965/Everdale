@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -56,9 +57,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private ConfiguredModel[] cornStates(BlockState blockState, CropBlock cropBlock, String modelName, String TextureName) {
+        String suffix = blockState.getValue(CornCropBlock.HALF) == DoubleBlockHalf.LOWER ? "_lower" : "_upper";
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(((CornCropBlock) cropBlock).getAgeProperty()),
-                        new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  TextureName + blockState.getValue(((CornCropBlock) cropBlock).getAgeProperty())))
+        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(CornCropBlock.AGE) + suffix,
+                        new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  TextureName + blockState.getValue(CornCropBlock.AGE) + suffix))
                 .renderType("cutout"));
 
         return models;
