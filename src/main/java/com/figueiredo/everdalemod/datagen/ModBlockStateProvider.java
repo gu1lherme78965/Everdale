@@ -2,11 +2,10 @@ package com.figueiredo.everdalemod.datagen;
 
 import com.figueiredo.everdalemod.EverdaleMod;
 import com.figueiredo.everdalemod.block.ModBlocks;
-import com.figueiredo.everdalemod.block.custom.CornCropBlock;
 import com.figueiredo.everdalemod.block.custom.StrawberryCropBlock;
 import com.figueiredo.everdalemod.block.custom.TallCropBlock;
 import com.figueiredo.everdalemod.block.custom.util.TallCropData;
-import com.figueiredo.everdalemod.datagen.util.DatagenTallCropDataLoader;
+import com.figueiredo.everdalemod.datagen.util.TallCropRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -20,12 +19,15 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
 import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
+    private static final HashMap<String, ConfiguredModel> TALL_CROP_MODELS = new HashMap<>();
+
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, EverdaleMod.MOD_ID, exFileHelper);
-        DatagenTallCropDataLoader.loadExistingCrops(output, exFileHelper);
+        TallCropRegistry.initialise();
     }
 
     @Override
@@ -37,7 +39,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.RAW_TIN_BLOCK);
 
         makeSimpleCrop((CropBlock)ModBlocks.STRAWBERRY_CROP.get(), StrawberryCropBlock.AGE, "strawberry_stage", "strawberry_stage");
-        makeTallCrop((CropBlock)ModBlocks.CORN_CROP.get(), TallCropBlock.AGE, TallCropBlock.HALF, "corn_stage_", "corn_stage_");
+        makeTallCrop((CropBlock)ModBlocks.CORN_CROP.get(), TallCropBlock.AGE, TallCropBlock.HALF, TallCropRegistry.get("corn"));
 
     }
 
@@ -56,20 +58,39 @@ public class ModBlockStateProvider extends BlockStateProvider {
         return models;
     }
 
-    private void makeTallCrop(CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, String modelName, String textureName) {
-        Function<BlockState, ConfiguredModel[]> function = state -> tallCropStates(state, cropBlock, ageProperty, halfProperty, modelName, textureName);
+    private void makeTallCrop(CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, TallCropData data) {
+        Function<BlockState, ConfiguredModel[]> function = state -> tallCropStates(state, cropBlock, ageProperty, halfProperty, data);
 
         getVariantBuilder(cropBlock).forAllStates(function);
     }
 
-    private ConfiguredModel[] tallCropStates(BlockState blockState, CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, String modelName, String textureName) {
+    private ConfiguredModel[] tallCropStates(BlockState blockState, CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, TallCropData data) {
+        int currentAge = blockState.getValue(ageProperty);
+        int maxAge = data.maxAge();
+
         String suffix = blockState.getValue(halfProperty) == DoubleBlockHalf.LOWER ? "_lower" : "_upper";
+        String textureName = data.name() + "_stage_";
+        String path = textureName + currentAge + suffix;
+
         ConfiguredModel[] models = new ConfiguredModel[1];
 
-        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(ageProperty) + suffix,
-                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  textureName + blockState.getValue(ageProperty) + suffix))
+        if (currentAge > maxAge) {
+            models[0] = TALL_CROP_MODELS.get(textureName + maxAge +suffix);
+            if (models[0] == null) {
+                EverdaleMod.LOGGER.warn("Incapable of generating configured models for {} from cache", path);
+            }
+            return models;
+        };
+
+        models[0] = new ConfiguredModel(models().crop(path,
+                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  path))
                 .renderType("cutout"));
 
+        if (models[0] == null) {
+            EverdaleMod.LOGGER.warn("Incapable of generating configured models for {}", path);
+        }
+
+        TALL_CROP_MODELS.put(path, models[0]);
         return models;
     }
 

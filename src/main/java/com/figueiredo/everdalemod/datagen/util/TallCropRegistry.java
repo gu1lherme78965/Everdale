@@ -1,0 +1,87 @@
+package com.figueiredo.everdalemod.datagen.util;
+
+import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.block.custom.util.TallCropData;
+import com.figueiredo.everdalemod.block.custom.util.TallCropShapeProfile;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.data.ExistingFileHelper;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public final class TallCropRegistry {
+
+    private static boolean initialised = false;
+    private static final Map<String, TallCropData> DATA = new HashMap<>();
+
+    private TallCropRegistry() {}
+
+    // called once at datagen initialization
+    public static void initialise() {
+        if (initialised) return;
+        initialised = true;
+
+        // For each JSON file in tall_crops
+        List<String> crops = List.of("corn");
+        for (String cropName : crops) {
+            TallCropData data = loadCropFromResource("data/everdalemod/tall_crops/" + cropName + ".json");
+            DATA.put(cropName, data);
+        }
+    }
+
+    public static TallCropData get(String id) {
+        TallCropData data = DATA.get(id);
+        if (data == null) {
+            EverdaleMod.LOGGER.warn("Failed to get TallCropData with id {} - using FALLBACK data", id);
+            return TallCropDefaults.FALLBACK_DATA;
+        }
+        return data;
+    }
+
+    public static Collection<TallCropData> getAll() {
+        return DATA.values();
+    }
+
+    public static Collection<String> getAllResources() {
+        return DATA.keySet();
+    }
+
+    private static TallCropData loadCropFromResource(String path) {
+        try (InputStream stream = EverdaleMod.class.getClassLoader().getResourceAsStream(path)) {
+            if (stream == null) throw new IllegalStateException("Missing crop file: " + path);
+
+            JsonObject jsonObject = new Gson().fromJson(
+                    new InputStreamReader(stream, StandardCharsets.UTF_8),
+                    JsonObject.class
+            );
+
+            String name =  jsonObject.get("name").getAsString();
+            int maxAge = jsonObject.get("max_age").getAsInt();
+            int ageToGrowTop = jsonObject.get("age_to_grow_top").getAsInt();
+            TallCropShapeProfile shapeProfile = TallCropShapeProfile.valueOf(jsonObject.get("shape_profile").getAsString().toUpperCase());
+            ResourceLocation seedItem = new ResourceLocation(jsonObject.get("seed_item").getAsString());
+            ResourceLocation dropedItem = new ResourceLocation(jsonObject.get("drop_item").getAsString());
+
+            return new TallCropData(
+                    name,
+                    maxAge,
+                    ageToGrowTop,
+                    shapeProfile,
+                    seedItem,
+                    dropedItem
+            );
+        } catch (IOException e) {
+            throw new  IllegalStateException("Failed to load crop file: " + path, e);
+        }
+    }
+}

@@ -2,7 +2,7 @@ package com.figueiredo.everdalemod.block.custom;
 
 import com.figueiredo.everdalemod.EverdaleMod;
 import com.figueiredo.everdalemod.block.custom.util.TallCropData;
-import com.figueiredo.everdalemod.block.custom.util.TallCropDefaults;
+import com.figueiredo.everdalemod.datagen.util.TallCropDefaults;
 import com.figueiredo.everdalemod.block.custom.util.TallCropShapeProfile;
 import com.figueiredo.everdalemod.block.custom.util.TallCropShapes;
 import net.minecraft.core.BlockPos;
@@ -36,7 +36,7 @@ import java.util.function.Supplier;
 
 public class TallCropBlock extends CropBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 8);
+    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 100);
 
     private final Supplier<TallCropData> data;
 

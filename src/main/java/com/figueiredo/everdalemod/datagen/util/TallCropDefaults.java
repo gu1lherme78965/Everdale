@@ -1,5 +1,7 @@
-package com.figueiredo.everdalemod.block.custom.util;
+package com.figueiredo.everdalemod.datagen.util;
 
+import com.figueiredo.everdalemod.block.custom.util.TallCropData;
+import com.figueiredo.everdalemod.block.custom.util.TallCropShapeProfile;
 import net.minecraft.resources.ResourceLocation;
 
 public final class TallCropDefaults {
