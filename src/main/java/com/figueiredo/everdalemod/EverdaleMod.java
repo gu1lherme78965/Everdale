@@ -1,6 +1,7 @@
 package com.figueiredo.everdalemod;
 
 import com.figueiredo.everdalemod.block.ModBlocks;
+import com.figueiredo.everdalemod.block.custom.loader.TallCropDataLoader;
 import com.figueiredo.everdalemod.item.ModCreativeModeTabs;
 import com.figueiredo.everdalemod.item.ModItems;
 import com.mojang.logging.LogUtils;
@@ -8,6 +9,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,10 +27,12 @@ public class EverdaleMod {
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "everdalemod";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public EverdaleMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
+
+        MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
 
         ModCreativeModeTabs.register(modEventBus);
 
@@ -67,5 +71,9 @@ public class EverdaleMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
 
         }
+    }
+
+    private void onAddReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(new TallCropDataLoader());
     }
 }

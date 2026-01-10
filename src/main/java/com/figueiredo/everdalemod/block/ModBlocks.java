@@ -3,7 +3,10 @@ package com.figueiredo.everdalemod.block;
 import com.figueiredo.everdalemod.EverdaleMod;
 import com.figueiredo.everdalemod.block.custom.CornCropBlock;
 import com.figueiredo.everdalemod.block.custom.StrawberryCropBlock;
+import com.figueiredo.everdalemod.block.custom.TallCropBlock;
+import com.figueiredo.everdalemod.block.custom.loader.TallCropDataLoader;
 import com.figueiredo.everdalemod.item.ModItems;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -41,7 +44,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> STRAWBERRY_CROP = BLOCKS.register("strawberry_crop",
                     () -> new StrawberryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
     public static final RegistryObject<Block> CORN_CROP = BLOCKS.register("corn_crop",
-                    () -> new CornCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+                    () -> new TallCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion(),
+                            () -> TallCropDataLoader.get(
+                                    new ResourceLocation(EverdaleMod.MOD_ID, "corn"))));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> blockRegistry = BLOCKS.register(name, block);

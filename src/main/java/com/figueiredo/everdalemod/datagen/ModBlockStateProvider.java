@@ -4,6 +4,9 @@ import com.figueiredo.everdalemod.EverdaleMod;
 import com.figueiredo.everdalemod.block.ModBlocks;
 import com.figueiredo.everdalemod.block.custom.CornCropBlock;
 import com.figueiredo.everdalemod.block.custom.StrawberryCropBlock;
+import com.figueiredo.everdalemod.block.custom.TallCropBlock;
+import com.figueiredo.everdalemod.block.custom.util.TallCropData;
+import com.figueiredo.everdalemod.datagen.util.DatagenTallCropDataLoader;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +25,7 @@ import java.util.function.Function;
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, EverdaleMod.MOD_ID, exFileHelper);
+        DatagenTallCropDataLoader.loadExistingCrops(output, exFileHelper);
     }
 
     @Override
@@ -33,7 +37,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.RAW_TIN_BLOCK);
 
         makeSimpleCrop((CropBlock)ModBlocks.STRAWBERRY_CROP.get(), StrawberryCropBlock.AGE, "strawberry_stage", "strawberry_stage");
-        makeTallCrop((CropBlock)ModBlocks.CORN_CROP.get(), CornCropBlock.AGE, CornCropBlock.HALF, "corn_stage_", "corn_stage_");
+        makeTallCrop((CropBlock)ModBlocks.CORN_CROP.get(), TallCropBlock.AGE, TallCropBlock.HALF, "corn_stage_", "corn_stage_");
 
     }
 
@@ -45,8 +49,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private ConfiguredModel[] simpleCropSates(BlockState blockState, CropBlock cropBlock, IntegerProperty ageProperty, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(ageProperty).toString(),
-                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" + textureName + blockState.getValue(ageProperty).toString()))
+        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(ageProperty),
+                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" + textureName + blockState.getValue(ageProperty)))
                     .renderType("cutout"));
 
         return models;
@@ -61,8 +65,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private ConfiguredModel[] tallCropStates(BlockState blockState, CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, String modelName, String textureName) {
         String suffix = blockState.getValue(halfProperty) == DoubleBlockHalf.LOWER ? "_lower" : "_upper";
         ConfiguredModel[] models = new ConfiguredModel[1];
-        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(ageProperty).toString() + suffix,
-                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  textureName + blockState.getValue(ageProperty).toString() + suffix))
+
+        models[0] = new ConfiguredModel(models().crop(modelName + blockState.getValue(ageProperty) + suffix,
+                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  textureName + blockState.getValue(ageProperty) + suffix))
                 .renderType("cutout"));
 
         return models;

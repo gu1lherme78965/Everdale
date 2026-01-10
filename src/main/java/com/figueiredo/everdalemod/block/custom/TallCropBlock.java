@@ -1,6 +1,10 @@
 package com.figueiredo.everdalemod.block.custom;
 
-import com.figueiredo.everdalemod.item.ModItems;
+import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.block.custom.util.TallCropData;
+import com.figueiredo.everdalemod.block.custom.util.TallCropDefaults;
+import com.figueiredo.everdalemod.block.custom.util.TallCropShapeProfile;
+import com.figueiredo.everdalemod.block.custom.util.TallCropShapes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -22,46 +26,73 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
-public class CornCropBlock extends CropBlock {
-    public CornCropBlock(Properties pProperties) {
-        super(pProperties);
-        this.registerDefaultState(this.defaultBlockState()
-                .setValue(this.getAgeProperty(), 0)
-                .setValue(HALF, DoubleBlockHalf.LOWER)
-                .setValue(AGE, 0));
-    }
+import java.util.function.Supplier;
 
-    public static final int MAX_AGE = 8;
-    public static final int AGE_TO_GROW_TOP = 8; // Stage at which crop will generate block above
+public class TallCropBlock extends CropBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 8);
 
-    private static final VoxelShape[] LOWER_SHAPE_BY_AGE = new VoxelShape[]{
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
-    };
-    private static final VoxelShape[] UPPER_SHAPE_BY_AGE = new VoxelShape[]{
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
-    };
+    private final Supplier<TallCropData> data;
+
+    public TallCropBlock(Properties pProperties, Supplier<TallCropData> tallCropDataSupplier) {
+        super(pProperties);
+        this.data = tallCropDataSupplier;
+
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(HALF, DoubleBlockHalf.LOWER)
+                .setValue(AGE, 0));
+
+    }
+
+    protected TallCropData data() {
+        TallCropData data = this.data.get();
+        if (data == null) {
+            EverdaleMod.LOGGER.warn(
+                    "TallCropData not loaded yet for block {} - using Fallback",
+                    this
+            );
+            return TallCropDefaults.FALLBACK_DATA;
+        } else {
+            return data;
+        }
+    }
+
+    @Override
+    protected IntegerProperty getAgeProperty() {
+        return AGE;
+    }
+
+    @Override
+    public int getMaxAge() {
+        return data().maxAge();
+    }
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        if (pState.getValue(HALF) == DoubleBlockHalf.UPPER) {
-            return UPPER_SHAPE_BY_AGE[pState.getValue(AGE) - AGE_TO_GROW_TOP];
-        } else {
-            return LOWER_SHAPE_BY_AGE[pState.getValue(AGE)];
+        TallCropShapeProfile shapeProfile = data().shapeProfile();
+
+        VoxelShape[] up = TallCropShapes.UPPER.get(shapeProfile);
+        VoxelShape[] down = TallCropShapes.LOWER.get(shapeProfile);
+
+        if (up == null || down == null) {
+            EverdaleMod.LOGGER.warn(
+                    "Missing voxel shapes for profile {}",
+                    shapeProfile
+            );
+            return Shapes.block();
         }
+
+        if (pState.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            return TallCropShapes.LOWER.get(shapeProfile)[pState.getValue(AGE)];
+        }
+
+        return TallCropShapes.UPPER.get(shapeProfile)[pState.getValue(AGE) - ageToGrowTop()];
     }
 
     @Override
@@ -98,7 +129,7 @@ public class CornCropBlock extends CropBlock {
                 pLevel.setBlock(pPos, newBlockState, 2);
 
                 // generate or updates block above if the threshold was hit
-                if (newAge >= AGE_TO_GROW_TOP && (pLevel.getBlockState(pPos.above(1)).is(Blocks.AIR) ||
+                if (newAge >= ageToGrowTop() && (pLevel.getBlockState(pPos.above(1)).is(Blocks.AIR) ||
                         pLevel.getBlockState(pPos.above(1)).getBlock() == this)) {
                     pLevel.setBlock(pPos.above(1), newBlockState.setValue(HALF, DoubleBlockHalf.UPPER).setValue(AGE, newAge), 3);
                 }
@@ -142,18 +173,8 @@ public class CornCropBlock extends CropBlock {
     }
 
     @Override
-    public int getMaxAge() {
-        return MAX_AGE;
-    }
-
-    @Override
-    public IntegerProperty getAgeProperty() {
-        return AGE;
-    }
-
-    @Override
     protected ItemLike getBaseSeedId() {
-        return ModItems.CORN_SEEDS.get();
+        return ForgeRegistries.ITEMS.getValue(data().seedItem());
     }
 
     @Override
@@ -192,6 +213,10 @@ public class CornCropBlock extends CropBlock {
     }
 
     private boolean isMature(BlockState pState) {
-        return pState.getValue(AGE) >= MAX_AGE;
+        return pState.getValue(AGE) >= getMaxAge();
+    }
+
+    private int ageToGrowTop() {
+        return data().ageToGrowTop();
     }
 }

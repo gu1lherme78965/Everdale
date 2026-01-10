@@ -1,0 +1,8 @@
+{
+  "name": "corn",
+  "max_age": 8,
+  "age_to_grow_top": 8,
+  "shape_profile": "corn",
+  "seed_item": "everdalemod:corn_seeds",
+  "drop_item": "everdalemod:corn"
+}
