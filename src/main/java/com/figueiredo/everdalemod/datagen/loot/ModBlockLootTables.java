@@ -1,8 +1,10 @@
 package com.figueiredo.everdalemod.datagen.loot;
 
 import com.figueiredo.everdalemod.block.ModBlocks;
-import com.figueiredo.everdalemod.block.custom.CornCropBlock;
-import com.figueiredo.everdalemod.block.custom.StrawberryCropBlock;
+import com.figueiredo.everdalemod.block.custom.SimpleCropBlock;
+import com.figueiredo.everdalemod.block.custom.TallCropBlock;
+import com.figueiredo.everdalemod.datagen.util.SimpleCropRegistry;
+import com.figueiredo.everdalemod.datagen.util.TallCropRegistry;
 import com.figueiredo.everdalemod.item.ModItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -38,14 +40,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         LootItemCondition.Builder lootItemConditionBuilderStrawberry = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.STRAWBERRY_CROP.get())
-                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(StrawberryCropBlock.AGE, StrawberryCropBlock.MAX_AGE));
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SimpleCropBlock.AGE, SimpleCropRegistry.get("strawberry").maxAge()));
 
         this.add(ModBlocks.STRAWBERRY_CROP.get(), createCropDrops(ModBlocks.STRAWBERRY_CROP.get(), ModItems.STRAWBERRY.get(),
                 ModItems.STRAWBERRY_SEEDS.get(), lootItemConditionBuilderStrawberry));
 
         LootItemCondition.Builder lootItemConditionBuilderCorn = LootItemBlockStatePropertyCondition
                 .hasBlockStateProperties(ModBlocks.CORN_CROP.get())
-                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CornCropBlock.AGE, CornCropBlock.MAX_AGE));
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(TallCropBlock.AGE, TallCropRegistry.get("corn").maxAge()));
 
         this.add(ModBlocks.CORN_CROP.get(), createCropDrops(ModBlocks.CORN_CROP.get(), ModItems.CORN.get(),
                 ModItems.CORN_SEEDS.get(), lootItemConditionBuilderCorn));

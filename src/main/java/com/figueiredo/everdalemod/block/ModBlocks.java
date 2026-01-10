@@ -1,14 +1,11 @@
 package com.figueiredo.everdalemod.block;
 
 import com.figueiredo.everdalemod.EverdaleMod;
-import com.figueiredo.everdalemod.block.custom.CornCropBlock;
 import com.figueiredo.everdalemod.block.custom.SimpleCropBlock;
-import com.figueiredo.everdalemod.block.custom.StrawberryCropBlock;
 import com.figueiredo.everdalemod.block.custom.TallCropBlock;
 import com.figueiredo.everdalemod.block.custom.loader.SimpleCropDataLoader;
 import com.figueiredo.everdalemod.block.custom.loader.TallCropDataLoader;
 import com.figueiredo.everdalemod.item.ModItems;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
