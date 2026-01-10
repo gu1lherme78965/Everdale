@@ -22,6 +22,7 @@ public final class SimpleCropRegistry {
 
     private static boolean initialised = false;
     private static final Map<String, SimpleCropData> DATA = new HashMap<>();
+    public static final List<String> CROPS = List.of("strawberry");
 
     private SimpleCropRegistry() {}
 
@@ -30,9 +31,8 @@ public final class SimpleCropRegistry {
         if (initialised) return;
         initialised = true;
 
-        // For each JSON file in tall_crops
-        List<String> crops = List.of("strawberry");
-        for (String cropName : crops) {
+        // For each JSON file in simple_crops
+        for (String cropName : CROPS) {
             SimpleCropData data = loadCropFromResource("data/everdalemod/simple_crops/" + cropName + ".json");
             DATA.put(cropName, data);
         }

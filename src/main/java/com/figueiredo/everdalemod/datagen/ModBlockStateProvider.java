@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.HashMap;
@@ -41,13 +42,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.TIN_BLOCK);
         blockWithItem(ModBlocks.RAW_TIN_BLOCK);
 
-        makeSimpleCrop((CropBlock)ModBlocks.STRAWBERRY_CROP.get(), SimpleCropBlock.AGE, SimpleCropRegistry.get("strawberry"));
-        makeTallCrop((CropBlock)ModBlocks.CORN_CROP.get(), TallCropBlock.AGE, TallCropBlock.HALF, TallCropRegistry.get("corn"));
-
+        registerCropBlocks();
     }
 
-    private void makeSimpleCrop(CropBlock cropBlock, IntegerProperty ageProperty, SimpleCropData data) {
-        Function<BlockState, ConfiguredModel[]> function = state -> simpleCropSates(state, cropBlock, ageProperty, data);
+    private void registerCropBlocks() {
+        // register TallCropBlocks
+        for (String tallCropName : TallCropRegistry.CROPS) {
+            makeTallCrop((CropBlock) ForgeRegistries.BLOCKS.getValue(
+                    new ResourceLocation(EverdaleMod.MOD_ID, tallCropName.toLowerCase().replace(' ', '_') + "_crop")),
+                    TallCropRegistry.get(tallCropName));
+        }
+
+        // register SimpleCropBlocks
+        for (String simpleCropName : SimpleCropRegistry.CROPS) {
+            makeSimpleCrop((CropBlock) ForgeRegistries.BLOCKS.getValue(
+                    new ResourceLocation(EverdaleMod.MOD_ID, simpleCropName.toLowerCase().replace(' ', '_') + "_crop")),
+                    SimpleCropRegistry.get(simpleCropName));
+        }
+    }
+
+    private void makeSimpleCrop(CropBlock cropBlock, SimpleCropData data) {
+        Function<BlockState, ConfiguredModel[]> function = state -> simpleCropSates(state, cropBlock, SimpleCropBlock.AGE, data);
 
         getVariantBuilder(cropBlock).forAllStates(function);
     }
@@ -77,8 +92,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         return models;
     }
 
-    private void makeTallCrop(CropBlock cropBlock, IntegerProperty ageProperty, EnumProperty<DoubleBlockHalf> halfProperty, TallCropData data) {
-        Function<BlockState, ConfiguredModel[]> function = state -> tallCropStates(state, cropBlock, ageProperty, halfProperty, data);
+    private void makeTallCrop(CropBlock cropBlock, TallCropData data) {
+        Function<BlockState, ConfiguredModel[]> function = state -> tallCropStates(state, cropBlock, TallCropBlock.AGE, TallCropBlock.HALF, data);
 
         getVariantBuilder(cropBlock).forAllStates(function);
     }

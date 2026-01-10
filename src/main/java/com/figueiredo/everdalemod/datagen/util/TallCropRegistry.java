@@ -14,15 +14,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class TallCropRegistry {
 
     private static boolean initialised = false;
     private static final Map<String, TallCropData> DATA = new HashMap<>();
+    public static final List<String> CROPS = List.of("corn");
 
     private TallCropRegistry() {}
 
@@ -32,8 +30,7 @@ public final class TallCropRegistry {
         initialised = true;
 
         // For each JSON file in tall_crops
-        List<String> crops = List.of("corn");
-        for (String cropName : crops) {
+        for (String cropName : CROPS) {
             TallCropData data = loadCropFromResource("data/everdalemod/tall_crops/" + cropName + ".json");
             DATA.put(cropName, data);
         }
