@@ -31,7 +31,7 @@ public final class TallCropRegistry {
 
         // For each JSON file in tall_crops
         for (String cropName : CROPS) {
-            TallCropData data = loadCropFromResource("data/everdalemod/tall_crops/" + cropName + ".json");
+            TallCropData data = loadCropFromResource("data/everdalemod/crops/tall_crops/" + cropName + ".json");
             DATA.put(cropName, data);
         }
     }

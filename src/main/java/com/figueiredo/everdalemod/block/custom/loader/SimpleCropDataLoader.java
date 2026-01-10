@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class SimpleCropDataLoader extends SimpleJsonResourceReloadListener {
     public SimpleCropDataLoader() {
-        super(new Gson(), "simple_crops");
+        super(new Gson(), "crops/simple_crops");
     }
 
     private static final Map<ResourceLocation, SimpleCropData> CROPS = new HashMap<>();

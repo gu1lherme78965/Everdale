@@ -81,7 +81,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             return models;
         }
         models[0] = new ConfiguredModel(models().crop(path,
-                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" + path))
+                    new ResourceLocation(EverdaleMod.MOD_ID, "block/crops/simple/" + data.name().toLowerCase().replace(' ', '/') + '/' + path))
                     .renderType("cutout"));
 
         if (models[0] == null) {
@@ -114,7 +114,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         };
 
         models[0] = new ConfiguredModel(models().crop(path,
-                    new ResourceLocation(EverdaleMod.MOD_ID, "block/" +  path))
+                    new ResourceLocation(EverdaleMod.MOD_ID, "block/crops/tall/"+ data.name().toLowerCase().replace(' ', '_') + '/' +  path))
                 .renderType("cutout"));
 
         if (models[0] == null) {

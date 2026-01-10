@@ -33,7 +33,7 @@ public final class SimpleCropRegistry {
 
         // For each JSON file in simple_crops
         for (String cropName : CROPS) {
-            SimpleCropData data = loadCropFromResource("data/everdalemod/simple_crops/" + cropName + ".json");
+            SimpleCropData data = loadCropFromResource("data/everdalemod/crops/simple_crops/" + cropName + ".json");
             DATA.put(cropName, data);
         }
     }
