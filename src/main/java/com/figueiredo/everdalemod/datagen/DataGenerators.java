@@ -1,6 +1,7 @@
 package com.figueiredo.everdalemod.datagen;
 
 import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.datagen.util.SimpleCropRegistry;
 import com.figueiredo.everdalemod.datagen.util.TallCropRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -18,6 +19,7 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
 
         TallCropRegistry.initialise();
+        SimpleCropRegistry.initialise();
 
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();

@@ -1,6 +1,7 @@
 package com.figueiredo.everdalemod;
 
 import com.figueiredo.everdalemod.block.ModBlocks;
+import com.figueiredo.everdalemod.block.custom.loader.SimpleCropDataLoader;
 import com.figueiredo.everdalemod.block.custom.loader.TallCropDataLoader;
 import com.figueiredo.everdalemod.item.ModCreativeModeTabs;
 import com.figueiredo.everdalemod.item.ModItems;
@@ -74,6 +75,7 @@ public class EverdaleMod {
     }
 
     private void onAddReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(new SimpleCropDataLoader());
         event.addListener(new TallCropDataLoader());
     }
 }

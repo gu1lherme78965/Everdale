@@ -2,8 +2,10 @@ package com.figueiredo.everdalemod.block;
 
 import com.figueiredo.everdalemod.EverdaleMod;
 import com.figueiredo.everdalemod.block.custom.CornCropBlock;
+import com.figueiredo.everdalemod.block.custom.SimpleCropBlock;
 import com.figueiredo.everdalemod.block.custom.StrawberryCropBlock;
 import com.figueiredo.everdalemod.block.custom.TallCropBlock;
+import com.figueiredo.everdalemod.block.custom.loader.SimpleCropDataLoader;
 import com.figueiredo.everdalemod.block.custom.loader.TallCropDataLoader;
 import com.figueiredo.everdalemod.item.ModItems;
 import net.minecraft.resources.ResourceLocation;
@@ -42,11 +44,11 @@ public class ModBlocks {
                     UniformInt.of(3, 6)));
 
     public static final RegistryObject<Block> STRAWBERRY_CROP = BLOCKS.register("strawberry_crop",
-                    () -> new StrawberryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion()));
+                    () -> new SimpleCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion(),
+                            () -> SimpleCropDataLoader.get("strawberry")));
     public static final RegistryObject<Block> CORN_CROP = BLOCKS.register("corn_crop",
                     () -> new TallCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT).noCollission().noOcclusion(),
-                            () -> TallCropDataLoader.get(
-                                    new ResourceLocation(EverdaleMod.MOD_ID, "corn"))));
+                            () -> TallCropDataLoader.get("corn")));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> blockRegistry = BLOCKS.register(name, block);

@@ -1,0 +1,7 @@
+{
+  "name": "strawberry",
+  "max_age": 5,
+  "shape_profile": "strawberry",
+  "seed_item": "everdalemod:strawberry_seeds",
+  "drop_item": "everdale_mod:strawberry"
+}
