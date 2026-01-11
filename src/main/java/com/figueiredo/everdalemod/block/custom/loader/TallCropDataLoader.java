@@ -27,18 +27,18 @@ public class TallCropDataLoader extends SimpleJsonResourceReloadListener {
 
         resourceLocationJsonElementMap.forEach((resourceLocation, jsonElement) -> {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            System.out.println(TallCropShapeProfile.valueOf(jsonObject.get("shape_profile").getAsString().toUpperCase()));
+            JsonObject cropObject = jsonObject.getAsJsonObject("crop_block");
 
             TallCropData data = new TallCropData(
-                    jsonObject.get("name").getAsString(),
-                    jsonObject.get("max_age").getAsInt(),
-                    jsonObject.get("age_to_grow_top").getAsInt(),
-                    TallCropShapeProfile.valueOf(jsonObject.get("shape_profile").getAsString().toUpperCase()),
-                    new ResourceLocation(jsonObject.get("seed_item").getAsString()),
-                    new ResourceLocation(jsonObject.get("drop_item").getAsString())
+                    cropObject.get("name").getAsString(),
+                    cropObject.get("max_age").getAsInt(),
+                    cropObject.get("age_to_grow_top").getAsInt(),
+                    TallCropShapeProfile.valueOf(cropObject.get("shape_profile").getAsString().toUpperCase()),
+                    new ResourceLocation(cropObject.get("seed_item_id").getAsString()),
+                    new ResourceLocation(cropObject.get("drop_item_id").getAsString())
             );
 
-            CROPS.put(new ResourceLocation(EverdaleMod.MOD_ID, jsonObject.get("name").getAsString()), data);
+            CROPS.put(new ResourceLocation(EverdaleMod.MOD_ID, cropObject.get("name").getAsString()), data);
         });
     }
 

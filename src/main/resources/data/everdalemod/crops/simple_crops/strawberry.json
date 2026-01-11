@@ -1,7 +1,14 @@
 {
-  "name": "strawberry",
-  "max_age": 5,
-  "shape_profile": "strawberry",
-  "seed_item": "everdalemod:strawberry_seeds",
-  "drop_item": "everdalemod:strawberry"
+  "crop_block": {
+    "name": "strawberry",
+    "max_age": 5,
+    "shape_profile": "strawberry",
+    "seed_item_id": "everdalemod:strawberry_seeds",
+    "drop_item_id": "everdalemod:strawberry"
+  },
+  "food_item": {
+    "name": "strawberry",
+    "nutrition": 2,
+    "saturation_modifier": 0.2
+  }
 }

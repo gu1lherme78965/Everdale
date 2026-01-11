@@ -61,13 +61,14 @@ public final class TallCropRegistry {
                     new InputStreamReader(stream, StandardCharsets.UTF_8),
                     JsonObject.class
             );
+            JsonObject cropObject = jsonObject.getAsJsonObject("crop_block");
 
-            String name =  jsonObject.get("name").getAsString();
-            int maxAge = jsonObject.get("max_age").getAsInt();
-            int ageToGrowTop = jsonObject.get("age_to_grow_top").getAsInt();
-            TallCropShapeProfile shapeProfile = TallCropShapeProfile.valueOf(jsonObject.get("shape_profile").getAsString().toUpperCase());
-            ResourceLocation seedItem = new ResourceLocation(jsonObject.get("seed_item").getAsString());
-            ResourceLocation dropedItem = new ResourceLocation(jsonObject.get("drop_item").getAsString());
+            String name =  cropObject.get("name").getAsString();
+            int maxAge = cropObject.get("max_age").getAsInt();
+            int ageToGrowTop = cropObject.get("age_to_grow_top").getAsInt();
+            TallCropShapeProfile shapeProfile = TallCropShapeProfile.valueOf(cropObject.get("shape_profile").getAsString().toUpperCase());
+            ResourceLocation seedItem = new ResourceLocation(cropObject.get("seed_item_id").getAsString());
+            ResourceLocation dropedItem = new ResourceLocation(cropObject.get("drop_item_id").getAsString());
 
             return new TallCropData(
                     name,

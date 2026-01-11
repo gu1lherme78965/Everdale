@@ -1,8 +1,15 @@
 {
-  "name": "corn",
-  "max_age": 8,
-  "age_to_grow_top": 8,
-  "shape_profile": "corn",
-  "seed_item": "everdalemod:corn_seeds",
-  "drop_item": "everdalemod:corn"
+  "crop_block": {
+    "name": "corn",
+    "max_age": 8,
+    "age_to_grow_top": 8,
+    "shape_profile": "corn",
+    "seed_item_id": "everdalemod:corn_seeds",
+    "drop_item_id": "everdalemod:corn"
+  },
+  "food_item": {
+    "name": "corn",
+    "nutrition": 3,
+    "saturation_modifier": 0.3
+  }
 }
