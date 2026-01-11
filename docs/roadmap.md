@@ -51,3 +51,9 @@ Each phase builds upon the previous one, with the goal of delivering a **cohesiv
 
 ## :timer_clock: Phase 3 - Content Expansions & Breadth
 **Goal**: Reach a satisfying level of content variety without introducing new core systems.
+- Broader selection of crops, fruits and ingredients
+- Expanded recipe catalog
+- Additional animal variations or behaviors
+- Exploration-driven discoveries (rare plants, ingredients)
+
+> No new major systems are introduced in this phase. The focus is on **content richness**, not mechanical complexity.
