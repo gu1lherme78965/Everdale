@@ -68,6 +68,8 @@ public class ChunkData extends SavedData {
     }
 
     public void remove (BlockPos pos) {
+        if (map.get(pos.asLong()) == null) return;
+
         map.remove(pos.asLong());
         setDirty();
     }

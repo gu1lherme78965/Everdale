@@ -32,7 +32,7 @@ public class ModForgeEvents {
         BlockPos pos = event.getPos();
         BlockState state = event.getPlacedBlock();
 
-        if (!isSoil(state)) return;
+        if (!isSoil(state.getBlock())) return;
 
         ChunkPos chunkPos = new ChunkPos(pos);
         ChunkData chunkData = ChunkData.get(level, chunkPos);
@@ -67,7 +67,7 @@ public class ModForgeEvents {
         }
     }
 
-    private static boolean isSoil(BlockState state) {
-        return SOIL_BLOCKS.contains(state.getBlock());
+    private static boolean isSoil(Block block) {
+        return SOIL_BLOCKS.contains(block);
     }
 }
