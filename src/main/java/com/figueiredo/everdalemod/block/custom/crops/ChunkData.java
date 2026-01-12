@@ -58,7 +58,8 @@ public class ChunkData extends SavedData {
     }
 
     public SoilContentInformation get(BlockPos pos) {
-        return map.get(pos.asLong());
+        SoilContentInformation info = map.get(pos.asLong());
+        return info == null ? SoilContentInformation.zero() : info;
     }
 
     public void set (BlockPos pos, SoilContentInformation soil) {

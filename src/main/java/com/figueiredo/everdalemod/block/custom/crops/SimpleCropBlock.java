@@ -78,10 +78,7 @@ public class SimpleCropBlock extends CropBlock {
             );
             return Shapes.block();
         }
-
-        EverdaleMod.LOGGER.warn("age is {}", getMaxAge());
-        int currentAge = pState.getValue(AGE) > getMaxAge() ? getMaxAge() : pState.getValue(AGE);
-        return SimpleCropShapes.get(shapeProfile)[currentAge];
+        return SimpleCropShapes.get(shapeProfile)[pState.getValue(AGE)];
     }
 
     @Override

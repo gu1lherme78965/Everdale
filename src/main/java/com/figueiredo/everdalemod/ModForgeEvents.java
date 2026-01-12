@@ -58,6 +58,7 @@ public class ModForgeEvents {
         if (!event.getToolAction().equals(ToolActions.HOE_TILL)) return;
 
         BlockPos pos = event.getPos();
+
         ChunkPos chunkPos = new ChunkPos(pos);
         ChunkData chunkData = ChunkData.get(level, chunkPos);
 
