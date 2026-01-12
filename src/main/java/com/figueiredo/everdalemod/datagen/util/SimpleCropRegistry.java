@@ -1,10 +1,8 @@
 package com.figueiredo.everdalemod.datagen.util;
 
 import com.figueiredo.everdalemod.EverdaleMod;
-import com.figueiredo.everdalemod.block.custom.util.SimpleCropData;
-import com.figueiredo.everdalemod.block.custom.util.SimpleCropShapeProfile;
-import com.figueiredo.everdalemod.block.custom.util.TallCropData;
-import com.figueiredo.everdalemod.block.custom.util.TallCropShapeProfile;
+import com.figueiredo.everdalemod.block.custom.crops.util.SimpleCropData;
+import com.figueiredo.everdalemod.block.custom.crops.util.SimpleCropShapeProfile;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;

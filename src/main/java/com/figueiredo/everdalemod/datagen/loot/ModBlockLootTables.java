@@ -1,8 +1,8 @@
 package com.figueiredo.everdalemod.datagen.loot;
 
 import com.figueiredo.everdalemod.block.ModBlocks;
-import com.figueiredo.everdalemod.block.custom.SimpleCropBlock;
-import com.figueiredo.everdalemod.block.custom.TallCropBlock;
+import com.figueiredo.everdalemod.block.custom.crops.SimpleCropBlock;
+import com.figueiredo.everdalemod.block.custom.crops.TallCropBlock;
 import com.figueiredo.everdalemod.datagen.util.SimpleCropRegistry;
 import com.figueiredo.everdalemod.datagen.util.TallCropRegistry;
 import com.figueiredo.everdalemod.item.ModItems;

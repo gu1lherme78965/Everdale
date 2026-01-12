@@ -2,10 +2,10 @@ package com.figueiredo.everdalemod.datagen;
 
 import com.figueiredo.everdalemod.EverdaleMod;
 import com.figueiredo.everdalemod.block.ModBlocks;
-import com.figueiredo.everdalemod.block.custom.SimpleCropBlock;
-import com.figueiredo.everdalemod.block.custom.TallCropBlock;
-import com.figueiredo.everdalemod.block.custom.util.SimpleCropData;
-import com.figueiredo.everdalemod.block.custom.util.TallCropData;
+import com.figueiredo.everdalemod.block.custom.crops.SimpleCropBlock;
+import com.figueiredo.everdalemod.block.custom.crops.TallCropBlock;
+import com.figueiredo.everdalemod.block.custom.crops.util.SimpleCropData;
+import com.figueiredo.everdalemod.block.custom.crops.util.TallCropData;
 import com.figueiredo.everdalemod.datagen.util.SimpleCropRegistry;
 import com.figueiredo.everdalemod.datagen.util.TallCropRegistry;
 import net.minecraft.data.PackOutput;

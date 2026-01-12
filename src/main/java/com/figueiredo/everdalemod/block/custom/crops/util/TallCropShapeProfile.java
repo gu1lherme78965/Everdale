@@ -1,4 +1,4 @@
-package com.figueiredo.everdalemod.block.custom.util;
+package com.figueiredo.everdalemod.block.custom.crops.util;
 
 public enum TallCropShapeProfile {
     SHORT,

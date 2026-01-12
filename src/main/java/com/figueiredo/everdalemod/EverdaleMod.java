@@ -1,13 +1,11 @@
 package com.figueiredo.everdalemod;
 
 import com.figueiredo.everdalemod.block.ModBlocks;
-import com.figueiredo.everdalemod.block.custom.loader.SimpleCropDataLoader;
-import com.figueiredo.everdalemod.block.custom.loader.TallCropDataLoader;
+import com.figueiredo.everdalemod.block.custom.crops.loader.SimpleCropDataLoader;
+import com.figueiredo.everdalemod.block.custom.crops.loader.TallCropDataLoader;
 import com.figueiredo.everdalemod.item.ModCreativeModeTabs;
 import com.figueiredo.everdalemod.item.ModItems;
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;

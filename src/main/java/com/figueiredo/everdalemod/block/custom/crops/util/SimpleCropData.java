@@ -1,12 +1,11 @@
-package com.figueiredo.everdalemod.block.custom.util;
+package com.figueiredo.everdalemod.block.custom.crops.util;
 
 import net.minecraft.resources.ResourceLocation;
 
-public record TallCropData(
+public record SimpleCropData(
         String name,
         int maxAge,
-        int ageToGrowTop,
-        TallCropShapeProfile shapeProfile,
+        SimpleCropShapeProfile shapeProfile,
         ResourceLocation seedItem,
         ResourceLocation dropItem
 ) {

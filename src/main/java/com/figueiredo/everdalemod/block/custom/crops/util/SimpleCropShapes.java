@@ -1,4 +1,4 @@
-package com.figueiredo.everdalemod.block.custom.util;
+package com.figueiredo.everdalemod.block.custom.crops.util;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.VoxelShape;

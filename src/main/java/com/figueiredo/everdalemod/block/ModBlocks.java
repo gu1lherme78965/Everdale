@@ -1,17 +1,16 @@
 package com.figueiredo.everdalemod.block;
 
 import com.figueiredo.everdalemod.EverdaleMod;
-import com.figueiredo.everdalemod.block.custom.SimpleCropBlock;
-import com.figueiredo.everdalemod.block.custom.TallCropBlock;
-import com.figueiredo.everdalemod.block.custom.loader.SimpleCropDataLoader;
-import com.figueiredo.everdalemod.block.custom.loader.TallCropDataLoader;
+import com.figueiredo.everdalemod.block.custom.crops.SimpleCropBlock;
+import com.figueiredo.everdalemod.block.custom.crops.TallCropBlock;
+import com.figueiredo.everdalemod.block.custom.crops.loader.SimpleCropDataLoader;
+import com.figueiredo.everdalemod.block.custom.crops.loader.TallCropDataLoader;
 import com.figueiredo.everdalemod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,8 +18,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlocks {

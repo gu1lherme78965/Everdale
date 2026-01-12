@@ -1,10 +1,8 @@
-package com.figueiredo.everdalemod.block.custom.loader;
+package com.figueiredo.everdalemod.block.custom.crops.loader;
 
 import com.figueiredo.everdalemod.EverdaleMod;
-import com.figueiredo.everdalemod.block.custom.util.SimpleCropData;
-import com.figueiredo.everdalemod.block.custom.util.SimpleCropShapeProfile;
-import com.figueiredo.everdalemod.block.custom.util.TallCropData;
-import com.figueiredo.everdalemod.block.custom.util.TallCropShapeProfile;
+import com.figueiredo.everdalemod.block.custom.crops.util.TallCropData;
+import com.figueiredo.everdalemod.block.custom.crops.util.TallCropShapeProfile;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -16,12 +14,12 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SimpleCropDataLoader extends SimpleJsonResourceReloadListener {
-    public SimpleCropDataLoader() {
-        super(new Gson(), "crops/simple_crops");
+public class TallCropDataLoader extends SimpleJsonResourceReloadListener {
+    public TallCropDataLoader() {
+        super(new Gson(), "crops/tall_crops");
     }
 
-    private static final Map<ResourceLocation, SimpleCropData> CROPS = new HashMap<>();
+    private static final Map<ResourceLocation, TallCropData> CROPS = new HashMap<>();
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> resourceLocationJsonElementMap, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
@@ -31,10 +29,11 @@ public class SimpleCropDataLoader extends SimpleJsonResourceReloadListener {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
             JsonObject cropObject = jsonObject.getAsJsonObject("crop_block");
 
-            SimpleCropData data = new SimpleCropData(
+            TallCropData data = new TallCropData(
                     cropObject.get("name").getAsString(),
                     cropObject.get("max_age").getAsInt(),
-                    SimpleCropShapeProfile.valueOf(cropObject.get("shape_profile").getAsString().toUpperCase()),
+                    cropObject.get("age_to_grow_top").getAsInt(),
+                    TallCropShapeProfile.valueOf(cropObject.get("shape_profile").getAsString().toUpperCase()),
                     new ResourceLocation(cropObject.get("seed_item_id").getAsString()),
                     new ResourceLocation(cropObject.get("drop_item_id").getAsString())
             );
@@ -43,7 +42,7 @@ public class SimpleCropDataLoader extends SimpleJsonResourceReloadListener {
         });
     }
 
-    public static SimpleCropData get(String name) {
+    public static TallCropData get(String name) {
         return CROPS.get(new ResourceLocation(EverdaleMod.MOD_ID, name));
     }
 }
