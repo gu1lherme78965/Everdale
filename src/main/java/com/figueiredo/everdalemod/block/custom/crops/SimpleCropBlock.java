@@ -1,7 +1,9 @@
 package com.figueiredo.everdalemod.block.custom.crops;
 
 import com.figueiredo.everdalemod.EverdaleMod;
-import com.figueiredo.everdalemod.block.custom.crops.util.*;
+import com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop.SimpleCropData;
+import com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop.SimpleCropShapeProfile;
+import com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop.SimpleCropShapes;
 import com.figueiredo.everdalemod.datagen.util.SimpleCropDefaults;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

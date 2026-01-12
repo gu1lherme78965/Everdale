@@ -1,8 +1,8 @@
 package com.figueiredo.everdalemod.block.custom.crops.loader;
 
 import com.figueiredo.everdalemod.EverdaleMod;
-import com.figueiredo.everdalemod.block.custom.crops.util.TallCropData;
-import com.figueiredo.everdalemod.block.custom.crops.util.TallCropShapeProfile;
+import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropData;
+import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropShapeProfile;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

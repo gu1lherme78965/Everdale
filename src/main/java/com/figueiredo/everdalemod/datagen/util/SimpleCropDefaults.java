@@ -1,7 +1,7 @@
 package com.figueiredo.everdalemod.datagen.util;
 
-import com.figueiredo.everdalemod.block.custom.crops.util.SimpleCropData;
-import com.figueiredo.everdalemod.block.custom.crops.util.SimpleCropShapeProfile;
+import com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop.SimpleCropData;
+import com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop.SimpleCropShapeProfile;
 import net.minecraft.resources.ResourceLocation;
 
 public final class SimpleCropDefaults {

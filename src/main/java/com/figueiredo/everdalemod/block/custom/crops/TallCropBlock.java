@@ -1,10 +1,10 @@
 package com.figueiredo.everdalemod.block.custom.crops;
 
 import com.figueiredo.everdalemod.EverdaleMod;
-import com.figueiredo.everdalemod.block.custom.crops.util.TallCropData;
+import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropData;
 import com.figueiredo.everdalemod.datagen.util.TallCropDefaults;
-import com.figueiredo.everdalemod.block.custom.crops.util.TallCropShapeProfile;
-import com.figueiredo.everdalemod.block.custom.crops.util.TallCropShapes;
+import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropShapeProfile;
+import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropShapes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

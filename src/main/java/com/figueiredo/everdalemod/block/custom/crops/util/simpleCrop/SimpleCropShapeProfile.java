@@ -1,4 +1,4 @@
-package com.figueiredo.everdalemod.block.custom.crops.util;
+package com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop;
 
 public enum SimpleCropShapeProfile {
     SHORT,
