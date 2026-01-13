@@ -1,6 +1,10 @@
 package com.figueiredo.everdalemod.block.custom.crops;
 
 import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.block.custom.crops.util.GrowthContext;
+import com.figueiredo.everdalemod.block.custom.crops.util.GrowthResult;
+import com.figueiredo.everdalemod.block.custom.crops.util.Nutrients;
+import com.figueiredo.everdalemod.block.custom.crops.util.SoilContentInformation;
 import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropData;
 import com.figueiredo.everdalemod.datagen.util.TallCropDefaults;
 import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropShapeProfile;
@@ -112,9 +116,16 @@ public class TallCropBlock extends CropBlock {
         int maxAge = getMaxAge();
 
         if (currentAge < maxAge) {
-            if (pRandom.nextInt(5) == 0) { // example growth chance
-                growCrops(pLevel, pPos, pState);
-            }
+            ChunkData chunkData = ChunkData.get(pLevel, new ChunkPos(pPos));
+            SoilContentInformation soilContentInformation = chunkData.get(pPos.below());
+
+            GrowthResult result = GrowthSolver.calculateGrowth(new GrowthContext(data(), soilContentInformation));
+            Nutrients leftover = GrowthSolver.getLeftoverNutrients(soilContentInformation.availableNutrients(),
+                    result.consumedNutrients());
+
+            chunkData.set(pPos.below(), new SoilContentInformation(leftover));
+
+            if (result.shouldGrow()) growCrops(pLevel, pPos, pState);
         }
     }
 
