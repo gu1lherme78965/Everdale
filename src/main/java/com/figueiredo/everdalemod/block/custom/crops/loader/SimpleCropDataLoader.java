@@ -1,6 +1,7 @@
 package com.figueiredo.everdalemod.block.custom.crops.loader;
 
 import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.block.custom.crops.util.Nutrients;
 import com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop.SimpleCropData;
 import com.figueiredo.everdalemod.block.custom.crops.util.simpleCrop.SimpleCropShapeProfile;
 import com.google.gson.Gson;
@@ -27,18 +28,41 @@ public class SimpleCropDataLoader extends SimpleJsonResourceReloadListener {
 
         resourceLocationJsonElementMap.forEach((resourceLocation, jsonElement) -> {
             JsonObject jsonObject = jsonElement.getAsJsonObject();
-            JsonObject cropObject = jsonObject.getAsJsonObject("crop_block");
 
             SimpleCropData data = new SimpleCropData(
-                    cropObject.get("name").getAsString(),
-                    cropObject.get("max_age").getAsInt(),
-                    SimpleCropShapeProfile.valueOf(cropObject.get("shape_profile").getAsString().toUpperCase()),
-                    new ResourceLocation(cropObject.get("seed_item_id").getAsString()),
-                    new ResourceLocation(cropObject.get("drop_item_id").getAsString())
+                    jsonObject.get("name").getAsString(),
+                    jsonObject.get("max_age").getAsInt(),
+                    getNutritionalIntake(jsonObject),
+                    getNutritionalPreference(jsonObject),
+                    SimpleCropShapeProfile.valueOf(jsonObject.get("shape_profile").getAsString().toUpperCase()),
+                    new ResourceLocation(jsonObject.get("seed_item_id").getAsString()),
+                    new ResourceLocation(jsonObject.get("drop_item_id").getAsString())
             );
 
-            CROPS.put(new ResourceLocation(EverdaleMod.MOD_ID, cropObject.get("name").getAsString()), data);
+            CROPS.put(new ResourceLocation(EverdaleMod.MOD_ID, jsonObject.get("name").getAsString()), data);
         });
+    }
+
+    private static Nutrients getNutritionalIntake(JsonObject jsonObject) {
+        JsonObject nutritionObject = jsonObject.getAsJsonObject("nutrients");
+        JsonObject intake = nutritionObject.getAsJsonObject("intake");
+
+        return new Nutrients(
+                intake.get("nitrogen").getAsInt(),
+                intake.get("phosphorus").getAsInt(),
+                intake.get("potassium").getAsInt()
+        );
+    }
+
+    private static Nutrients getNutritionalPreference(JsonObject jsonObject) {
+        JsonObject nutritionObject = jsonObject.getAsJsonObject("nutrients");
+        JsonObject intake = nutritionObject.getAsJsonObject("preference");
+
+        return new Nutrients(
+                intake.get("nitrogen").getAsInt(),
+                intake.get("phosphorus").getAsInt(),
+                intake.get("potassium").getAsInt()
+        );
     }
 
     public static SimpleCropData get(String name) {

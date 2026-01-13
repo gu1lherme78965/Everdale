@@ -1,14 +1,21 @@
 {
-  "crop_block": {
-    "name": "strawberry",
-    "max_age": 5,
-    "shape_profile": "strawberry",
-    "seed_item_id": "everdalemod:strawberry_seeds",
-    "drop_item_id": "everdalemod:strawberry"
+  "name": "strawberry",
+  "max_age": 5,
+
+  "nutrients": {
+    "intake": {
+      "nitrogen": 2,
+      "phosphorus": 1,
+      "potassium": 4
+    },
+    "preference": {
+      "nitrogen": 40,
+      "phosphorus": 30,
+      "potassium": 70
+    }
   },
-  "food_item": {
-    "name": "strawberry",
-    "nutrition": 2,
-    "saturation_modifier": 0.2
-  }
+
+  "shape_profile": "strawberry",
+  "seed_item_id": "everdalemod:strawberry_seeds",
+  "drop_item_id": "everdalemod:strawberry"
 }

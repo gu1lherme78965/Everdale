@@ -1,6 +1,7 @@
 package com.figueiredo.everdalemod.datagen.util;
 
 import com.figueiredo.everdalemod.EverdaleMod;
+import com.figueiredo.everdalemod.block.custom.crops.util.Nutrients;
 import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropData;
 import com.figueiredo.everdalemod.block.custom.crops.util.tallCrop.TallCropShapeProfile;
 import com.google.gson.Gson;
@@ -58,18 +59,21 @@ public final class TallCropRegistry {
                     new InputStreamReader(stream, StandardCharsets.UTF_8),
                     JsonObject.class
             );
-            JsonObject cropObject = jsonObject.getAsJsonObject("crop_block");
 
-            String name =  cropObject.get("name").getAsString();
-            int maxAge = cropObject.get("max_age").getAsInt();
-            int ageToGrowTop = cropObject.get("age_to_grow_top").getAsInt();
-            TallCropShapeProfile shapeProfile = TallCropShapeProfile.valueOf(cropObject.get("shape_profile").getAsString().toUpperCase());
-            ResourceLocation seedItem = new ResourceLocation(cropObject.get("seed_item_id").getAsString());
-            ResourceLocation dropedItem = new ResourceLocation(cropObject.get("drop_item_id").getAsString());
+            String name =  jsonObject.get("name").getAsString();
+            int maxAge = jsonObject.get("max_age").getAsInt();
+            Nutrients intake = getNutritionalIntake(jsonObject);
+            Nutrients preference = getNutritionalPreference(jsonObject);
+            int ageToGrowTop = jsonObject.get("age_to_grow_top").getAsInt();
+            TallCropShapeProfile shapeProfile = TallCropShapeProfile.valueOf(jsonObject.get("shape_profile").getAsString().toUpperCase());
+            ResourceLocation seedItem = new ResourceLocation(jsonObject.get("seed_item_id").getAsString());
+            ResourceLocation dropedItem = new ResourceLocation(jsonObject.get("drop_item_id").getAsString());
 
             return new TallCropData(
                     name,
                     maxAge,
+                    intake,
+                    preference,
                     ageToGrowTop,
                     shapeProfile,
                     seedItem,
@@ -78,5 +82,27 @@ public final class TallCropRegistry {
         } catch (IOException e) {
             throw new  IllegalStateException("Failed to load crop file: " + path, e);
         }
+    }
+
+    private static Nutrients getNutritionalIntake(JsonObject jsonObject) {
+        JsonObject nutritionObject = jsonObject.getAsJsonObject("nutrients");
+        JsonObject intake = nutritionObject.getAsJsonObject("intake");
+
+        return new Nutrients(
+                intake.get("nitrogen").getAsInt(),
+                intake.get("phosphorus").getAsInt(),
+                intake.get("potassium").getAsInt()
+        );
+    }
+
+    private static Nutrients getNutritionalPreference(JsonObject jsonObject) {
+        JsonObject nutritionObject = jsonObject.getAsJsonObject("nutrients");
+        JsonObject intake = nutritionObject.getAsJsonObject("preference");
+
+        return new Nutrients(
+                intake.get("nitrogen").getAsInt(),
+                intake.get("phosphorus").getAsInt(),
+                intake.get("potassium").getAsInt()
+        );
     }
 }

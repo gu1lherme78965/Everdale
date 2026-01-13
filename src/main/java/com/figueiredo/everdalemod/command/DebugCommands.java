@@ -49,9 +49,9 @@ public class DebugCommands {
             return -1;
         } else {
             player.sendSystemMessage(Component.literal(
-                    "Soil at " + pos + ": N=" + soil.nitrogen() +
-                            " P=" + soil.phosphorus() +
-                            " K=" + soil.potassium()
+                    "Soil at " + pos + ": N=" + soil.availableNutrients().nitrogen() +
+                            " P=" + soil.availableNutrients().phosphorus() +
+                            " K=" + soil.availableNutrients().potassium()
             ));
         }
 

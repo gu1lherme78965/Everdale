@@ -1,15 +1,22 @@
 {
-  "crop_block": {
-    "name": "corn",
-    "max_age": 8,
-    "age_to_grow_top": 8,
-    "shape_profile": "corn",
-    "seed_item_id": "everdalemod:corn_seeds",
-    "drop_item_id": "everdalemod:corn"
+  "name": "corn",
+  "max_age": 8,
+
+  "nutrients": {
+    "intake": {
+      "nitrogen": 4,
+      "phosphorus": 2,
+      "potassium": 3
+    },
+    "preference": {
+      "nitrogen": 80,
+      "phosphorus": 40,
+      "potassium": 60
+    }
   },
-  "food_item": {
-    "name": "corn",
-    "nutrition": 3,
-    "saturation_modifier": 0.3
-  }
+
+  "age_to_grow_top": 8,
+  "shape_profile": "corn",
+  "seed_item_id": "everdalemod:corn_seeds",
+  "drop_item_id": "everdalemod:corn"
 }
